@@ -1,23 +1,16 @@
-# Usa una imagen base de PHP con Composer preinstalado
-FROM php:8.1-apache
-
-# Instala las extensiones necesarias
-RUN docker-php-ext-install mysqli
-
-# Copia los archivos de tu proyecto al contenedor
-COPY . /var/www/html/
+# Usa una imagen base de PHP
+FROM php:8.0-cli
 
 # Establece el directorio de trabajo
-WORKDIR /var/www/html/login
+WORKDIR /app
 
-# Instala Composer
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+# Copia todos los archivos de tu proyecto al contenedor
+COPY . /app
 
-# Ejecuta composer install
-RUN composer install
+# Instala las dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    && docker-php-ext-install zip
 
-# Exponer el puerto 80
-EXPOSE 80
-
-# Comando para iniciar Apache
-CMD ["apache2-foreground"]
+# Comando para iniciar el servidor PHP
+CMD ["php", "-S", "0.0.0.0:10000", "-t", "login"]
