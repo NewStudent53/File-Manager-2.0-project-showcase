@@ -5,7 +5,8 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: |
-      apt-get update && apt-get install -y php
+      apt-get update && apt-get install -y php libzip-dev
+      docker-php-ext-install zip
       php --version
       echo "No build steps required"
     startCommand: "php -S 0.0.0.0:$PORT -t login"
