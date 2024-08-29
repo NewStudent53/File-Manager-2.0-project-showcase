@@ -1,9 +1,10 @@
 services:
   - type: web
     name: File-Manager-2.0-project-showcase
-    env: docker
+    env: node # O selecciona "Other" si está disponible
     plan: free
-    dockerfilePath: ./Dockerfile
+    buildCommand: "./install_composer.sh"
+    startCommand: "php -S 0.0.0.0:10000 -t login"
     envVars:
       - key: DATABASE_URL
         value: ${my-database.internal.connectionString}
