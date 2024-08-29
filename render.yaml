@@ -4,10 +4,11 @@ services:
     env: node # O selecciona "Other" si está disponible
     plan: free
     buildCommand: |
+      cd login
       curl -sS https://getcomposer.org/installer | php
       mv composer.phar /usr/local/bin/composer
       composer install
-    startCommand: "php -S 0.0.0.0:10000 -t public"
+    startCommand: "php -S 0.0.0.0:10000 -t login"
     envVars:
       - key: DATABASE_URL
         value: ${my-database.internal.connectionString}
