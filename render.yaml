@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: my-web-service
+    env: php
+    plan: free
+    buildCommand: ""
+    startCommand: "php -S 0.0.0.0:10000 -t public"
+    envVars:
+      - key: DATABASE_URL
+        value: ${my-database.internal.connectionString}
+
+databases:
+  - name: my-database
+    plan: free
+    mysqlVersion: 8
+    envVars:
+      - key: MYSQL_DATABASE
+        value: "login"
+      - key: MYSQL_USER
+        value: "root"
+      - key: MYSQL_PASSWORD
+        value: "1d0ntw4nn4kn0w"
+      - key: MYSQL_ROOT_PASSWORD
+        value: "1d0ntw4nn4kn0w"
