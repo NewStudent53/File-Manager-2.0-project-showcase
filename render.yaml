@@ -1,12 +1,9 @@
 services:
   - type: web
     name: File-Manager-2.0-project-showcase
-    env: node # O selecciona "Other" si está disponible
+    env: docker
     plan: free
-    buildCommand: |
-      apt-get update && apt-get install -y php
-      echo "No build steps required"
-    startCommand: "php -S 0.0.0.0:$PORT -t login"
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
         value: ${my-database.internal.connectionString}
