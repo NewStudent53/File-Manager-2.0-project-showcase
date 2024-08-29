@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: my-web-service
-    env: php
+    name: File-Manager-2.0-project-showcase
+    env: node # o
     plan: free
     buildCommand: ""
     startCommand: "php -S 0.0.0.0:10000 -t public"
