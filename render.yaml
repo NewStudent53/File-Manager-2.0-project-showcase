@@ -4,10 +4,12 @@ services:
     env: node # O selecciona "Other" si está disponible
     plan: free
     buildCommand: "./install_composer.sh"
-    startCommand: "php -S 0.0.0.0:10000 -t login"
+    startCommand: "php -S 0.0.0.0:$PORT -t login"
     envVars:
       - key: DATABASE_URL
         value: ${my-database.internal.connectionString}
+      - key: PORT
+        value: "10000"
 
 databases:
   - name: my-database
