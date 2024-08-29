@@ -3,7 +3,9 @@ services:
     name: File-Manager-2.0-project-showcase
     env: node # O selecciona "Other" si está disponible
     plan: free
-    buildCommand: "./install_composer.sh"
+    buildCommand: |
+      apt-get update && apt-get install -y php
+      echo "No build steps required"
     startCommand: "php -S 0.0.0.0:$PORT -t login"
     envVars:
       - key: DATABASE_URL
