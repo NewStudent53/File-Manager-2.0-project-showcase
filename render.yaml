@@ -1,9 +1,12 @@
 services:
   - type: web
     name: File-Manager-2.0-project-showcase
-    env: node 
+    env: node # O selecciona "Other" si está disponible
     plan: free
-    buildCommand: "" 
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/local/bin/composer
+      composer install
     startCommand: "php -S 0.0.0.0:10000 -t login"
     envVars:
       - key: DATABASE_URL
